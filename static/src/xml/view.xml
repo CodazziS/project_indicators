@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+<data>
+    <record model="ir.ui.view" id="project_indicators_task_form">
+        <field name="name">project_indicators.task.form</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//page[@string='Extra Info']" position="after">
+                    <page string="Indicators">
+                        <form string="Indicators">
+                            <group>
+                                <newline />
+                                <button name="add_value" string="" type="object" icon="gtk-add" /><br />
+                                <field nolabel="1" name="indicators_definitions" context="{'id': id}">
+                                </field>
+                            </group>
+                        </form>
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="project_indicators_values_new_edit" model="ir.ui.view">
+        <field name="name">project_indicators.values_new_edit</field>
+        <field name="model">project_indicators.indicators_value</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Indicators value">
+                <group string="New value" col="2">
+                    <field name="month" string="Month"/>
+                    <field name="year" string="Year"/>
+                    <field name="definition_id" string="Definition"/>
+                    <field name="value" string="Value"/>
+                    <button name="write" string="Create" type="object"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    
+    <record id="project_indicators_values_new" model="ir.actions.act_window">
+        <field name="name">project_indicators.values_new</field>
+        <field name="res_model">project_indicators.indicators_value</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="project_indicators_values_new_edit"/>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="project_indicators_indicators_definition_edit" model="ir.ui.view">
+        <field name="name">project_indicators.indicators_definition.form</field>
+        <field name="model">project_indicators.indicators_definition</field>
+        <field name="arch" type="xml">
+            <form string="Indicators">
+                <group col="2">
+                    <group>
+                        <field name="field_name"/>
+                        <field name="field_type"/>
+                        <field name="sequence"/>
+                    </group>
+                    <newline />
+                    <group string="Total objectives">
+                        <field name="obj_sum_operator"/>
+                        <field name="obj_sum_value"/>
+                    </group>
+                    <group string="Monthly objectives">
+                        <field name="obj_month_operator"/>
+                        <field name="obj_month_value"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+</data>
+</openerp>
