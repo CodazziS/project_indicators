@@ -2,7 +2,6 @@
     'name': "Project Indicators",
     'author' : 'Stéphane Codazzi @ TeMPO-consulting',
     'category': 'Project',
-    'sequence': 1,
     'description': """
 Project Indicators
 ===================
