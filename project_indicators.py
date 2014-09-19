@@ -82,8 +82,10 @@ class project_indicators_indicators_definition(osv.osv):
             current_sum = 0
             for date in infos[line['id']]['dates']:
                 line[date] = infos[line['id']]['dates'][date]
-                if infos[line['id']]['dates'][date]:
+                if infos[line['id']]['dates'][date] and infos[line['id']]['dates'][date].isdigit():
                     current_sum += int(infos[line['id']]['dates'][date])
+                else:
+                    current_sum = '-'
 
             line['sum'] = current_sum
             line['objectives'] = ""
