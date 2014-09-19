@@ -33,7 +33,7 @@
                 <group string="New value" col="2">
                     <field name="month" string="Month"/>
                     <field name="year" string="Year"/>
-                    <field name="definition_id" string="Definition"/>
+                    <field name="definition_id" string="Indicator"/>
                     <field name="value" string="Value"/>
                     <button name="write" string="Create" type="object"/>
                 </group>
