@@ -14,7 +14,7 @@
                             <group>
                                 <newline />
                                 <button name="add_value" string="" type="object" icon="gtk-add" /><br />
-                                <field nolabel="1" name="indicators_definitions" context="{'id': id}">
+                                <field nolabel="1" colspan="2" name="indicators_definitions" context="{'id': id}">
                                 </field>
                             </group>
                         </form>
