@@ -1,6 +1,6 @@
 {
     'name': "Project Indicators",
-    'author' : 'Stéphane Codazzi @ TeMPO-Consulting',
+    'author': 'Stéphane Codazzi @ TeMPO-Consulting',
     'category': 'Project',
     'description': """
 Project Indicators
