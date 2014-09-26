@@ -3,7 +3,6 @@ import openerp.addons.decimal_precision as dp
 from lxml import etree as ET
 
 
-
 class project_indicators_task(osv.osv):
     _inherit = 'project.task'
 
@@ -42,13 +41,9 @@ class project_indicators_indicators_definition(osv.osv):
                 context=context)
         return res
 
-    def read(self,
-        cr,
-        uid,
-        ids,
-        fields=None,
-        context=None,
-        load='_classic_read'):
+    def read(self, cr, uid, ids, fields=None, context=None,
+             load='_classic_read'):
+
         if not context:
             context = {}
         res = super(project_indicators_indicators_definition, self).read(
@@ -82,7 +77,8 @@ class project_indicators_indicators_definition(osv.osv):
             current_sum = 0
             for date in infos[line['id']]['dates']:
                 line[date] = infos[line['id']]['dates'][date]
-                if infos[line['id']]['dates'][date] and infos[line['id']]['dates'][date].isdigit():
+                if infos[line['id']]['dates'][date] and \
+                        infos[line['id']]['dates'][date].isdigit():
                     current_sum += int(infos[line['id']]['dates'][date])
                 else:
                     current_sum = '-'
@@ -91,22 +87,22 @@ class project_indicators_indicators_definition(osv.osv):
             line['objectives'] = ""
             if infos[line['id']]['moo'] and infos[line['id']]['mov']:
                 line['objectives'] += ('Monthly: \n' +
-                    str(infos[line['id']]['moo']) + ' ' +
-                    str(infos[line['id']]['mov']) + '\n') 
+                                       str(infos[line['id']]['moo']) + ' ' +
+                                       str(infos[line['id']]['mov']) + '\n')
 
             if infos[line['id']]['soo'] and infos[line['id']]['sov']:
                 line['objectives'] += ('Total: \n' +
-                str(infos[line['id']]['soo']) + ' ' +
-                str(infos[line['id']]['sov']))
+                                       str(infos[line['id']]['soo']) + ' ' +
+                                       str(infos[line['id']]['sov']))
         return res
 
     def delete_value(self, cr, uid, ids, context=None):
-        definition = self.\
-            pool['project_indicators.indicators_definition'].browse(
-            cr,
-            uid,
-            ids[0],
-            context=context)
+        definition = self.pool['project_indicators.indicators_definition']\
+            .browse(
+                cr,
+                uid,
+                ids[0],
+                context=context)
         values = definition.values_ids
         year = int(context['date'][:4])
         month = int(context['date'][5:])
@@ -128,7 +124,7 @@ class project_indicators_indicators_definition(osv.osv):
                 __getattr__(name, *args, **kwargs)
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
-        context=None, toolbar=False, submenu=False):
+                        context=None, toolbar=False, submenu=False):
         if not context:
             context = {}
 
@@ -164,7 +160,8 @@ class project_indicators_indicators_definition(osv.osv):
                             months[date] = True
 
                 for key in months:
-                    months_str += '<field string="%(key)s" name="%(key)s" />'% {'key': key}
+                    months_str += '<field string="%(key)s" name="%(key)s" />'\
+                                  % {'key': key}
                     months_str += '\
                         <button name="delete_value_%(key)s" type="object"\
                         icon="gtk-close"\
@@ -187,19 +184,13 @@ class project_indicators_indicators_definition(osv.osv):
             ('number', 'Number'),
             ('text', 'Text')),
             'Field type', required="True"),
-        'obj_month_operator': fields.selection((
-                ('==', 'Equal'),
-                ('<', '<'),
-                ('>', '>'),
-            ),
-            'Monthly objectives operator'),
+        'obj_month_operator': fields.selection
+        ((('==', 'Equal'), ('<', '<'), ('>', '>')),
+        'Monthly objectives operator'),
         'obj_month_value': fields.char('Monthly objective value'),
-        'obj_sum_operator': fields.selection((
-                ('==', 'Equal'),
-                ('<', '<'),
-                ('>', '>'),
-            ),
-            'Total objectives operator'),
+        'obj_sum_operator': fields.selection
+        ((('==', 'Equal'), ('<', '<'), ('>', '>')),
+        'Total objectives operator'),
         'obj_sum_value': fields.char('Total objective value'),
         'values_ids': fields.one2many(
             'project_indicators.indicators_value',
@@ -210,7 +201,7 @@ class project_indicators_indicators_definition(osv.osv):
             'indicators_definitions',
             'Task'),
         'sequence': fields.integer('Sequence'),
-     }
+    }
 
 
 class project_indicators_indicators_value(osv.osv):
@@ -243,5 +234,5 @@ class project_indicators_indicators_value(osv.osv):
     }
 
     _sql_constraints = [('unique_sheme_type',
-        'unique(month,year,definition_id)',
-        'Error! This Type already exists!')]
+                         'unique(month,year,definition_id)',
+                         'Error! This Type already exists!')]
