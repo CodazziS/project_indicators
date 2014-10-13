@@ -42,7 +42,7 @@
     </record>
     
     <record id="project_indicators_values_new" model="ir.actions.act_window">
-        <field name="name">project_indicators.values_new</field>
+        <field name="name">Indicators</field>
         <field name="res_model">project_indicators.indicators_value</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_id" ref="project_indicators_values_new_edit"/>
